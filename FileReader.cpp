@@ -6,14 +6,21 @@
 using namespace std;
 
 int FileReader::ERROR_NEXT = -1;
+
 static int ERROR_NEXT;
 int FileReader::getNext() {
 	int result = ERROR_NEXT;
-	if (this->fileStream.is_open()) {
+	if (strlen(this->buffer) == this->offsetBuffer && this->fileStream.is_open()) {
 		//this->fileStream.open(this->filePath);
 		if (hasNext()) {
-			this->fileStream >> result;
+			this->fileStream >> this->buffer;
+			this->offsetBuffer = 0;
 		}
+	}
+	if (this->offsetBuffer < strlen(this->buffer)) {
+
+		result = this->convertToInt(this->buffer[this->offsetBuffer]);
+		this->offsetBuffer++;
 	}
 	return result;
 };
@@ -26,4 +33,8 @@ bool FileReader::hasNext() {
 };
 void FileReader::close() {
 	if (this->fileStream.is_open()) this->fileStream.close();
+}
+int FileReader::convertToInt(char ch) {
+	int x = ch - '0';
+	return x;
 }

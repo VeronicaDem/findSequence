@@ -6,10 +6,13 @@ class FileReader {
 private:
 	string filePath;
 	fstream fileStream;
+	int offsetBuffer = 0;
+	char buffer[256] = "";
+	int convertToInt(char ch);
+	bool hasNext();
 public:
 	static int ERROR_NEXT;
 	int getNext();
 	FileReader(string filePath);
-	bool hasNext();
 	void close();
 };

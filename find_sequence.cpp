@@ -3,13 +3,29 @@
 
 #include <iostream>
 #include "FileReader.h"
+#include "Sequence.h"
 int main()
 {
     FileReader * fileReader = new FileReader("C:\\Users\\Nica\\Documents\\cpp_projects\\file1.txt");
-    while (fileReader->hasNext()) {
+    /*while (fileReader->hasNext()) {
         std::cout << fileReader->getNext();
     }
+    fileReader->close();*/
+    //Sequence* seq = new Sequence();
+   // cout << "Input sequence (-1 to stop)" << endl;
+   /* int curElem;
+    cin >> curElem;
+    while (curElem != -1) {
+        seq->addElem(curElem);
+        cin >> curElem;
+    }*/
+    int elem = fileReader->getNext();
+    while (elem != FileReader::ERROR_NEXT) {
+        cout << "curElem: " << elem << endl;
+        elem = fileReader->getNext();
+    }
     fileReader->close();
+
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
