@@ -13,7 +13,8 @@ int FileReader::getNext() {
 	if (strlen(this->buffer) == this->offsetBuffer && this->fileStream.is_open()) {
 		//this->fileStream.open(this->filePath);
 		if (hasNext()) {
-			this->fileStream >> this->buffer;
+			//this->fileStream >> this->buffer;
+			this->fileStream.getline(this->buffer, 256, '\n');
 			this->offsetBuffer = 0;
 		}
 	}
