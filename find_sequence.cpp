@@ -18,8 +18,8 @@ int main()
    // FileReader* fileReader = Util::writeRandom(fileWriter, 1000000);
    // fileReader->close();
     auto start = high_resolution_clock::now();
-    for (int i = 0; i < 10000; i++) {
-        FileReader* fileReader = new FileReader("C:\\Users\\Nica\\Documents\\cpp_projects\\random_file_big.txt");
+    for (int i = 0; i < 1; i++) {
+        FileReader* fileReader = new FileReader("C:\\Users\\Nica\\Documents\\cpp_projects\\input.txt");
         vector<int> elems = Util::constructVector(fileReader);
         // saved no-pair elems
         bool found = false;
@@ -39,11 +39,18 @@ int main()
                 aX = bX;
                 bX = cX;
             }
+            if (aX == 0) {
+                indexLast++;
+                continue;
+            }
             cX = elems[indexLast];
             xxx = Util::getTriad(aX, bX, cX);
             int testYYY = xxx * 2;
             for (int i = indexLast + 1; i < elems.size() - 2; i++) {
                 int aY = elems[i];
+                if (aY == 0) {
+                    continue;
+                }
                 int bY = elems[i + 1];
                 int cY = elems[i + 2];
                 int yyy = Util::getTriad(aY, bY, cY);
